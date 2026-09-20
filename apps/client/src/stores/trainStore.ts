@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { TrainState } from '../types';
+import { ALL_TYPES } from '../lib/trainStyle';
+import { MapDensity, MarkerMode, TrainState, TrainType } from '../types';
 
 interface LayersVisibility {
   zones: boolean;
@@ -20,8 +21,12 @@ interface TrainStore {
   simulationStep: number;
   layersVisible: LayersVisibility;
   isReportingGps: boolean;
+  markerMode: MarkerMode;
+  mapDensity: MapDensity;
+  typeFilter: Record<TrainType, boolean>;
+  backendOnline: boolean;
+  focusRequest: { lng: number; lat: number; zoom: number } | null;
 
-  // Actions
   setTrains: (trains: TrainState[]) => void;
   updateTrain: (train: TrainState) => void;
   selectTrain: (trainNo: string | null) => void;
@@ -34,23 +39,42 @@ interface TrainStore {
   nextSimulationStep: () => void;
   setLayersVisible: (layers: Partial<LayersVisibility>) => void;
   setIsReportingGps: (reporting: boolean) => void;
+  setMarkerMode: (mode: MarkerMode) => void;
+  setMapDensity: (density: MapDensity) => void;
+  toggleTypeFilter: (type: TrainType) => void;
+  setAllTypeFilters: (on: boolean) => void;
+  setBackendOnline: (online: boolean) => void;
+  setFocusRequest: (focus: { lng: number; lat: number; zoom: number } | null) => void;
 }
+
+const allOn = () => {
+  const o = {} as Record<TrainType, boolean>;
+  ALL_TYPES.forEach((t) => {
+    o[t] = true;
+  });
+  return o;
+};
 
 export const useTrainStore = create<TrainStore>((set) => ({
   trains: new Map<string, TrainState>(),
-  selectedTrainNo: '12393',
+  selectedTrainNo: null,
   mode: 'PASSENGER',
   theme: 'dark',
-  followTrain: true,
+  followTrain: false,
   isSimulating: true,
   simulationStep: 0,
   isReportingGps: false,
+  markerMode: 'typed',
+  mapDensity: 'network',
+  typeFilter: allOn(),
+  backendOnline: false,
+  focusRequest: null,
   layersVisible: {
-    zones: true,
+    zones: false,
     tracksMain: true,
     tracksBranch: true,
-    sidings: true,
-    speeds: true,
+    sidings: false,
+    speeds: false,
     stations: true,
   },
 
@@ -70,12 +94,19 @@ export const useTrainStore = create<TrainStore>((set) => ({
 
   selectTrain: (trainNo) => set({ selectedTrainNo: trainNo }),
 
-  setMode: (mode) => set({ mode }),
+  setMode: (mode) =>
+    set({
+      mode,
+      mapDensity: mode === 'RAILFAN' ? 'railfan' : 'network',
+      layersVisible:
+        mode === 'RAILFAN'
+          ? { zones: false, tracksMain: true, tracksBranch: true, sidings: true, speeds: false, stations: true }
+          : { zones: false, tracksMain: true, tracksBranch: true, sidings: false, speeds: false, stations: true },
+    }),
 
   setTheme: (theme) => set({ theme }),
 
-  toggleTheme: () =>
-    set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
+  toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
 
   setFollowTrain: (follow) => set({ followTrain: follow }),
 
@@ -83,8 +114,7 @@ export const useTrainStore = create<TrainStore>((set) => ({
 
   setSimulationStep: (step) => set({ simulationStep: step }),
 
-  nextSimulationStep: () =>
-    set((state) => ({ simulationStep: state.simulationStep + 1 })),
+  nextSimulationStep: () => set((state) => ({ simulationStep: state.simulationStep + 1 })),
 
   setLayersVisible: (layers) =>
     set((state) => ({
@@ -92,4 +122,29 @@ export const useTrainStore = create<TrainStore>((set) => ({
     })),
 
   setIsReportingGps: (reporting) => set({ isReportingGps: reporting }),
+
+  setMarkerMode: (markerMode) => set({ markerMode }),
+
+  setMapDensity: (mapDensity) =>
+    set({
+      mapDensity,
+      mode: mapDensity === 'railfan' ? 'RAILFAN' : 'PASSENGER',
+    }),
+
+  toggleTypeFilter: (type) =>
+    set((state) => ({
+      typeFilter: { ...state.typeFilter, [type]: !state.typeFilter[type] },
+    })),
+
+  setAllTypeFilters: (on) => {
+    const next = {} as Record<TrainType, boolean>;
+    ALL_TYPES.forEach((t) => {
+      next[t] = on;
+    });
+    set({ typeFilter: next });
+  },
+
+  setBackendOnline: (backendOnline) => set({ backendOnline }),
+
+  setFocusRequest: (focusRequest) => set({ focusRequest }),
 }));

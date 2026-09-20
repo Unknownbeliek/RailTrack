@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import {
+  Search,
+  Train,
+  RotateCcw,
+  Sparkles,
+  User as UserIcon,
+  LogOut,
+  Filter,
+  Crosshair,
+  ChevronDown,
+} from 'lucide-react';
 import { useTrainStore } from '../../stores/trainStore';
 import { useAuthStore } from '../../stores/authStore';
-import { ModeToggle } from '../common/ModeToggle';
 import { ThemeToggle } from '../common/ThemeToggle';
-import { apiSimulateOvertake, apiResetSimulation, apiPostTelemetry } from '../../services/api';
-import { triggerSocketSimulation, resetSocketSimulation, emitGPSReport } from '../../services/socket';
-import { Search, Train, Sparkles, RotateCcw, Navigation, Layers, User as UserIcon, LogOut } from 'lucide-react';
+import { apiResetSimulation, apiSimulateOvertake } from '../../services/api';
+import { resetSocketSimulation, triggerSocketSimulation } from '../../services/socket';
+import { ALL_TYPES, TYPE_COLORS, TYPE_LABEL } from '../../lib/trainStyle';
+import { TrainType } from '../../types';
 
 interface HeaderProps {
   onOpenAuth: () => void;
@@ -15,153 +26,119 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAuth }) => {
   const {
     trains,
     selectedTrainNo,
-    mode,
     theme,
+    markerMode,
+    mapDensity,
+    typeFilter,
+    backendOnline,
+    followTrain,
     selectTrain,
-    updateTrain,
-    isReportingGps,
-    setIsReportingGps,
+    setMarkerMode,
+    setMapDensity,
+    toggleTypeFilter,
+    setFollowTrain,
+    setFocusRequest,
   } = useTrainStore();
-
   const { user, isAuthenticated, logout } = useAuthStore();
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isSimulatingLocal, setIsSimulatingLocal] = useState(false);
+  const [query, setQuery] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
-  const trainList = Array.from(trains.values());
+  const trainList = useMemo(() => Array.from(trains.values()), [trains]);
+  const liveCount = trainList.filter((t) => typeFilter[t.type] !== false).length;
 
-  const filteredTrains = trainList.filter(
-    (t) =>
-      t.trainNo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.trainName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const matches = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return trainList
+      .filter(
+        (t) =>
+          t.trainNo.toLowerCase().includes(q) ||
+          t.trainName.toLowerCase().includes(q) ||
+          t.fromStation.toLowerCase().includes(q) ||
+          t.toStation.toLowerCase().includes(q)
+      )
+      .slice(0, 12);
+  }, [query, trainList]);
 
-  const handleSimulateOvertake = async () => {
-    setIsSimulatingLocal(true);
+  const glass =
+    theme === 'light'
+      ? 'bg-white/90 border-slate-200 text-slate-900'
+      : 'bg-slate-950/80 border-white/10 text-slate-100';
+
+  const handleOvertake = async () => {
     try {
-      // Trigger via REST or Socket
-      const res = await apiSimulateOvertake();
-      if (res.trains) {
-        res.trains.forEach((t) => updateTrain(t));
-      }
+      await apiSimulateOvertake();
     } catch {
       triggerSocketSimulation();
-    } finally {
-      setIsSimulatingLocal(false);
     }
+    setMoreOpen(false);
   };
 
-  const handleResetSimulation = async () => {
+  const handleReset = async () => {
     try {
-      const res = await apiResetSimulation();
-      if (res.trains) {
-        res.trains.forEach((t) => updateTrain(t));
-      }
+      await apiResetSimulation();
     } catch {
       resetSocketSimulation();
     }
+    setMoreOpen(false);
   };
 
-  const handleToggleGPS = () => {
-    const nextState = !isReportingGps;
-    setIsReportingGps(nextState);
-
-    if (nextState && selectedTrainNo) {
-      // Emit a sample real-time user telemetry report
-      const selTrain = trains.get(selectedTrainNo);
-      if (selTrain) {
-        const report = {
-          trainNo: selectedTrainNo,
-          lat: selTrain.lat + (Math.random() - 0.5) * 0.005,
-          lng: selTrain.lng + (Math.random() - 0.5) * 0.005,
-          speed: Math.max(0, selTrain.speed + (Math.random() - 0.5) * 4),
-          heading: selTrain.heading,
-          accuracy: 8,
-          timestamp: Date.now(),
-        };
-        apiPostTelemetry(selectedTrainNo, report).catch(() => emitGPSReport(report));
-      }
-    }
+  const pickTrain = (trainNo: string) => {
+    const t = trains.get(trainNo);
+    selectTrain(trainNo);
+    if (t) setFocusRequest({ lng: t.snappedLng, lat: t.snappedLat, zoom: 8.5 });
+    setQuery('');
+    setSearchOpen(false);
   };
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-20 p-3 pointer-events-auto">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-        {/* Logo & App Name */}
-        <div
-          className={`flex items-center gap-3 ${
-            theme === 'light'
-              ? 'bg-white/90 border-slate-200 text-slate-900'
-              : 'bg-bgCardElevated/90 border-slate-700/80 text-textPrimary'
-          } backdrop-blur-md px-3.5 py-2 rounded-2xl border shadow-2xl`}
-        >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-accentBlue to-cyan-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-accentBlue/30">
+    <header className="absolute top-0 left-0 right-0 z-30 p-3 pointer-events-none">
+      <div className="max-w-[1400px] mx-auto flex items-start gap-2 flex-wrap">
+        <div className={`pointer-events-auto ${glass} backdrop-blur-md border rounded-2xl px-3 py-2 shadow-xl flex items-center gap-2.5`}>
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-300 text-slate-950 font-black text-sm flex items-center justify-center">
             TP
           </div>
-          <div>
-            <h1 className="font-extrabold text-sm tracking-tight flex items-center gap-1.5">
-              TrackPulse{' '}
-              <span className="text-[10px] px-1.5 py-0.2 bg-amber-500/20 text-amber-500 border border-amber-500/30 rounded font-mono font-bold">
-                INDIA
-              </span>
-            </h1>
-            <p className={`text-[10px] font-mono leading-none ${theme === 'light' ? 'text-slate-500' : 'text-textSecondary'}`}>
-              Spatial Rail Intelligence (MERN)
-            </p>
+          <div className="leading-tight">
+            <div className="text-[13px] font-extrabold tracking-tight">TrackPulse</div>
+            <div className="text-[10px] font-mono opacity-60 flex items-center gap-1.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${backendOnline ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+              {liveCount} trains · demo
+            </div>
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="relative flex-1 max-w-md">
-          <div className="relative flex items-center">
-            <Search className="w-4 h-4 absolute left-3 text-slate-400 pointer-events-none" />
+        <div className="pointer-events-auto relative flex-1 max-w-md">
+          <div className={`${glass} backdrop-blur-md border rounded-2xl shadow-xl flex items-center`}>
+            <Search className="w-4 h-4 ml-3 opacity-50" />
             <input
-              type="text"
-              placeholder="Search train (e.g. 12393 Sampark Kranti, 12301 Rajdhani)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => setIsSearchOpen(true)}
-              className={`w-full ${
-                theme === 'light'
-                  ? 'bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-400'
-                  : 'bg-bgCardElevated/90 border-slate-700/80 text-textPrimary placeholder:text-slate-500'
-              } backdrop-blur-md border text-xs rounded-2xl pl-9 pr-4 py-2.5 focus:outline-none focus:border-accentBlue shadow-2xl transition-all`}
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setSearchOpen(true);
+              }}
+              onFocus={() => setSearchOpen(true)}
+              placeholder="Search train no, name, station…"
+              className="w-full bg-transparent text-sm px-2.5 py-2.5 outline-none placeholder:opacity-40"
             />
           </div>
-
-          {/* Search Dropdown */}
-          {isSearchOpen && searchQuery.length > 0 && (
-            <div
-              className={`absolute top-12 left-0 right-0 ${
-                theme === 'light' ? 'bg-white border-slate-300' : 'bg-bgCard border-slate-700'
-              } border rounded-2xl p-2 shadow-2xl z-30 max-h-60 overflow-y-auto`}
-            >
-              {filteredTrains.map((t) => (
+          {searchOpen && matches.length > 0 && (
+            <div className={`absolute top-12 inset-x-0 ${glass} backdrop-blur-md border rounded-2xl shadow-2xl overflow-hidden z-40`}>
+              {matches.map((t) => (
                 <button
                   key={t.trainNo}
-                  onClick={() => {
-                    selectTrain(t.trainNo);
-                    setIsSearchOpen(false);
-                    setSearchQuery('');
-                  }}
-                  className={`w-full text-left p-2 ${
-                    theme === 'light' ? 'hover:bg-slate-100' : 'hover:bg-slate-800/70'
-                  } rounded-xl flex items-center justify-between text-xs transition-colors`}
+                  onClick={() => pickTrain(t.trainNo)}
+                  className="w-full text-left px-3 py-2 flex items-center justify-between hover:bg-white/5 text-xs"
                 >
-                  <div className="flex items-center gap-2">
-                    <Train className="w-3.5 h-3.5 text-accentBlue" />
-                    <span className="font-bold">{t.trainName}</span>
-                    <span className="text-slate-400 font-mono">({t.trainNo})</span>
-                  </div>
-                  <span
-                    className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                      theme === 'light'
-                        ? 'bg-slate-100 border-slate-200 text-slate-700'
-                        : 'bg-slate-900 border-slate-800 text-slate-300'
-                    }`}
-                  >
-                    {t.status}
+                  <span className="flex items-center gap-2">
+                    <Train className="w-3.5 h-3.5 opacity-70" />
+                    <span className="font-semibold">{t.trainName}</span>
+                    <span className="font-mono opacity-50">{t.trainNo}</span>
+                  </span>
+                  <span className="font-mono opacity-60">
+                    {t.fromStation}→{t.toStation}
                   </span>
                 </button>
               ))}
@@ -169,112 +146,148 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAuth }) => {
           )}
         </div>
 
-        {/* Controls: Simulation, Reporting, Modes, Theme, Auth */}
-        <div className="flex items-center gap-2">
-          {/* Simulation button */}
+        <div className={`pointer-events-auto ${glass} backdrop-blur-md border rounded-2xl shadow-xl p-1 flex items-center gap-1`}>
           <button
-            onClick={handleSimulateOvertake}
-            disabled={isSimulatingLocal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all active:scale-95 disabled:opacity-50"
-            title="Advance Rajdhani Overtake Scenario"
+            onClick={() => setMarkerMode('minimal')}
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-semibold ${
+              markerMode === 'minimal' ? 'bg-sky-400 text-slate-950' : 'opacity-70 hover:opacity-100'
+            }`}
+            title="Minimal: colour by delay"
           >
-            <Sparkles className="w-3.5 h-3.5 fill-slate-950" />
-            <span>Simulate Rajdhani Overtake</span>
+            Delay
           </button>
-
           <button
-            onClick={handleResetSimulation}
-            className="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors"
-            title="Reset Simulation"
+            onClick={() => setMarkerMode('typed')}
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-semibold ${
+              markerMode === 'typed' ? 'bg-sky-400 text-slate-950' : 'opacity-70 hover:opacity-100'
+            }`}
+            title="Typed: colour by train class"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            Class
           </button>
+        </div>
 
-          {/* GPS reporter button */}
+        <div className={`pointer-events-auto ${glass} backdrop-blur-md border rounded-2xl shadow-xl p-1 flex items-center gap-1`}>
           <button
-            onClick={handleToggleGPS}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
-              isReportingGps
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 animate-pulse'
-                : 'bg-slate-800/80 text-textSecondary border-slate-700 hover:text-textPrimary'
+            onClick={() => setMapDensity('network')}
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-semibold ${
+              mapDensity === 'network' ? 'bg-sky-400 text-slate-950' : 'opacity-70 hover:opacity-100'
             }`}
           >
-            <Navigation className={`w-3.5 h-3.5 ${isReportingGps ? 'text-emerald-400 fill-emerald-400' : ''}`} />
-            <span>{isReportingGps ? 'GPS Active' : "I'm on a train"}</span>
+            Network
           </button>
+          <button
+            onClick={() => setMapDensity('railfan')}
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] font-semibold ${
+              mapDensity === 'railfan' ? 'bg-orange-400 text-slate-950' : 'opacity-70 hover:opacity-100'
+            }`}
+          >
+            Railfan
+          </button>
+        </div>
 
-          <ModeToggle />
-          <ThemeToggle />
-
-          {/* User Auth Button */}
-          {isAuthenticated && user ? (
-            <div className="flex items-center gap-1.5 bg-slate-800/80 border border-slate-700 px-2.5 py-1 rounded-xl text-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="font-bold text-slate-200">{user.name.split(' ')[0]}</span>
-              <button
-                onClick={logout}
-                className="p-1 text-slate-400 hover:text-red-400 transition-colors"
-                title="Log Out"
-              >
-                <LogOut className="w-3 h-3" />
-              </button>
+        <div className="pointer-events-auto relative">
+          <button
+            onClick={() => setFilterOpen((v) => !v)}
+            className={`${glass} backdrop-blur-md border rounded-2xl shadow-xl p-2.5`}
+            title="Filter train types"
+          >
+            <Filter className="w-4 h-4" />
+          </button>
+          {filterOpen && (
+            <div className={`absolute right-0 top-12 ${glass} backdrop-blur-md border rounded-2xl shadow-2xl p-2 w-48 z-40`}>
+              {ALL_TYPES.map((type: TrainType) => (
+                <label key={type} className="flex items-center gap-2 px-2 py-1.5 text-[11px] cursor-pointer rounded-lg hover:bg-white/5">
+                  <input
+                    type="checkbox"
+                    className="accent-sky-400"
+                    checked={typeFilter[type]}
+                    onChange={() => toggleTypeFilter(type)}
+                  />
+                  <span className="w-2 h-2 rounded-full" style={{ background: TYPE_COLORS[type] }} />
+                  {TYPE_LABEL[type]}
+                </label>
+              ))}
             </div>
-          ) : (
-            <button
-              onClick={onOpenAuth}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-accentBlue/20 text-accentBlue border border-accentBlue/40 text-xs font-bold hover:bg-accentBlue/30 transition-colors shadow-lg"
-            >
-              <UserIcon className="w-3.5 h-3.5" />
-              <span>Sign In</span>
-            </button>
+          )}
+        </div>
+
+        <button
+          onClick={() => setFollowTrain(!followTrain)}
+          className={`pointer-events-auto ${glass} backdrop-blur-md border rounded-2xl shadow-xl p-2.5 ${
+            followTrain ? 'ring-1 ring-sky-400' : ''
+          }`}
+          title="Follow selected train"
+        >
+          <Crosshair className="w-4 h-4" />
+        </button>
+
+        <ThemeToggle />
+
+        <div className="pointer-events-auto relative">
+          <button
+            onClick={() => setMoreOpen((v) => !v)}
+            className={`${glass} backdrop-blur-md border rounded-2xl shadow-xl px-2.5 py-2 text-[11px] font-semibold flex items-center gap-1`}
+          >
+            More <ChevronDown className="w-3.5 h-3.5" />
+          </button>
+          {moreOpen && (
+            <div className={`absolute right-0 top-12 ${glass} backdrop-blur-md border rounded-2xl shadow-2xl p-1.5 w-52 z-40`}>
+              <button
+                onClick={handleOvertake}
+                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs hover:bg-white/5"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                Tundla overtake demo
+              </button>
+              <button
+                onClick={handleReset}
+                className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs hover:bg-white/5"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                Reset fleet
+              </button>
+              <div className="h-px bg-white/10 my-1" />
+              {isAuthenticated && user ? (
+                <button
+                  onClick={() => {
+                    logout();
+                    setMoreOpen(false);
+                  }}
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs hover:bg-white/5"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  Sign out ({user.name.split(' ')[0]})
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    onOpenAuth();
+                    setMoreOpen(false);
+                  }}
+                  className="w-full flex items-center gap-2 px-2.5 py-2 rounded-xl text-xs hover:bg-white/5"
+                >
+                  <UserIcon className="w-3.5 h-3.5" />
+                  Sign in
+                </button>
+              )}
+            </div>
           )}
         </div>
       </div>
 
-      {/* Railfan Mode Section Banner */}
-      {mode === 'RAILFAN' && (
-        <div
-          className={`max-w-7xl mx-auto mt-2 ${
-            theme === 'light' ? 'bg-white/95 border-slate-300 text-slate-800' : 'bg-slate-950/90 border-slate-800 text-slate-300'
-          } backdrop-blur-md border rounded-xl p-2 px-3 flex items-center justify-between text-xs font-mono shadow-xl`}
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-amber-500 font-bold flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5" /> SECTION: TDL-CNB (IRI North Central Zone)
-            </span>
-            <span>•</span>
-            <span>
-              Congestion: <strong className="text-amber-500">MEDIUM (2 Trains Active)</strong>
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-500 text-[11px]">
-            <span>
-              Block Section <strong>TDL-MARK</strong> occupied by <strong>12301 Rajdhani</strong>
-            </span>
+      {selectedTrainNo && trains.get(selectedTrainNo) && (
+        <div className="max-w-[1400px] mx-auto mt-2 pointer-events-none">
+          <div className={`inline-flex items-center gap-2 ${glass} backdrop-blur-md border rounded-full px-3 py-1 text-[11px] shadow-lg`}>
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{ background: TYPE_COLORS[trains.get(selectedTrainNo)!.type] }}
+            />
+            <span className="font-semibold">{trains.get(selectedTrainNo)!.trainName}</span>
+            <span className="font-mono opacity-60">{selectedTrainNo}</span>
           </div>
         </div>
       )}
-
-      {/* Train Selector Tabs */}
-      <div className="max-w-7xl mx-auto mt-2 flex items-center gap-2 overflow-x-auto pb-1">
-        {trainList.map((t) => (
-          <button
-            key={t.trainNo}
-            onClick={() => selectTrain(t.trainNo)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
-              t.trainNo === selectedTrainNo
-                ? 'bg-accentBlue text-slate-950 border-accentBlue shadow-lg shadow-accentBlue/20 font-extrabold'
-                : theme === 'light'
-                ? 'bg-white/90 text-slate-700 border-slate-300 hover:bg-slate-100'
-                : 'bg-bgCard/90 text-textSecondary border-slate-700/80 hover:text-textPrimary'
-            }`}
-          >
-            <Train className="w-3.5 h-3.5" />
-            <span>{t.trainName}</span>
-            <span className="font-mono text-[10px] opacity-80">({t.trainNo})</span>
-          </button>
-        ))}
-      </div>
     </header>
   );
 };

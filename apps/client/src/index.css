@@ -119,3 +119,17 @@ body.light .maplibregl-popup-content {
   font-size: 10px;
   font-family: monospace;
 }
+
+.tp-popup .maplibregl-popup-content {
+  background: rgba(8, 12, 20, 0.92) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 12px !important;
+  padding: 8px 10px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
+}
+.tp-popup .maplibregl-popup-tip {
+  border-top-color: rgba(8, 12, 20, 0.92) !important;
+}
+.tp-pop-name { font-weight: 700; font-size: 12px; color: #F8FAFC; }
+.tp-pop-meta { font-size: 10px; color: #94A3B8; font-family: ui-monospace, monospace; margin-top: 2px; }
+.tp-pop-delay { font-size: 10px; color: #7DD3FC; margin-top: 2px; font-weight: 600; }

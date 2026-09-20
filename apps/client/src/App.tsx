@@ -7,53 +7,33 @@ import { BottomSheet } from './components/panels/BottomSheet';
 import { Header } from './components/header/Header';
 import { AuthModal } from './components/auth/AuthModal';
 import { initSocket } from './services/socket';
-import { apiGetTrains, apiGetStations } from './services/api';
-import { Station } from './types';
+import { apiGetTrains } from './services/api';
 
 function DashboardView() {
   const { trainNo } = useParams<{ trainNo?: string }>();
-  const { trains, selectedTrainNo, selectTrain, setTrains, theme } = useTrainStore();
+  const { trains, selectedTrainNo, selectTrain, setTrains, theme, setBackendOnline } = useTrainStore();
   const { initializeAuth } = useAuthStore();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [stations, setStations] = useState<Station[]>([]);
 
-  // Synchronize URL train param
   useEffect(() => {
-    if (trainNo && trains.has(trainNo)) {
-      selectTrain(trainNo);
-    }
+    if (trainNo && trains.has(trainNo)) selectTrain(trainNo);
   }, [trainNo, trains, selectTrain]);
 
-  // Synchronize document theme
   useEffect(() => {
-    if (theme === 'light') {
-      document.body.classList.add('light');
-    } else {
-      document.body.classList.remove('light');
-    }
+    document.body.classList.toggle('light', theme === 'light');
   }, [theme]);
 
-  // Initialize socket and fetch initial data
   useEffect(() => {
     initializeAuth();
     initSocket();
-
-    // Fetch initial trains & stations via REST API
     apiGetTrains()
       .then((data) => {
-        if (data && data.length > 0) {
+        if (data?.length) {
           setTrains(data);
+          setBackendOnline(true);
         }
       })
-      .catch((e) => console.warn('Could not fetch trains from /api/trains:', e));
-
-    apiGetStations()
-      .then((data) => {
-        if (data && data.length > 0) {
-          setStations(data);
-        }
-      })
-      .catch((e) => console.warn('Could not fetch stations from /api/stations:', e));
+      .catch(() => setBackendOnline(false));
   }, []);
 
   const selectedTrain = selectedTrainNo ? trains.get(selectedTrainNo) : null;
@@ -64,16 +44,9 @@ function DashboardView() {
         theme === 'light' ? 'bg-slate-100 text-slate-900' : 'bg-bgPrimary text-textPrimary'
       }`}
     >
-      {/* Background Interactive MapLibre Canvas with IRI Layers */}
-      <MapView stations={stations} />
-
-      {/* Top Header Navigation */}
+      <MapView />
       <Header onOpenAuth={() => setIsAuthOpen(true)} />
-
-      {/* Kinematics & Context Bottom Sheet */}
       {selectedTrain && <BottomSheet train={selectedTrain} />}
-
-      {/* Auth Modal (Login / Register) */}
       <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </div>
   );

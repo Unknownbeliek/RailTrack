@@ -19,6 +19,15 @@ stationsRouter.get('/', async (req: Request, res: Response) => {
   }
 });
 
+stationsRouter.get('/geojson', async (_req: Request, res: Response) => {
+  try {
+    const { buildNetwork } = await import('../seed/network');
+    return res.json(buildNetwork().stationsGeoJSON);
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to build stations GeoJSON' });
+  }
+});
+
 // GET /api/stations/:code
 stationsRouter.get('/:code', async (req: Request, res: Response) => {
   try {

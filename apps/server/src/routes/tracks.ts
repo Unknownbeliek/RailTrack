@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { config } from '../config';
+import { buildNetwork } from '../seed/network';
 
 export const tracksRouter = Router();
 
@@ -26,15 +27,10 @@ tracksRouter.get('/', (_req: Request, res: Response) => {
 // GET /api/tracks/geojson
 tracksRouter.get('/geojson', (_req: Request, res: Response) => {
   try {
-    if (tracksGeoJSONCache) {
-      return res.json(tracksGeoJSONCache);
+    if (!tracksGeoJSONCache) {
+      tracksGeoJSONCache = buildNetwork().tracksGeoJSON;
     }
-    const filePath = path.join(config.dataDir, 'geojson', 'tracks-with-speed.geojson');
-    if (fs.existsSync(filePath)) {
-      tracksGeoJSONCache = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-      return res.json(tracksGeoJSONCache);
-    }
-    return res.status(404).json({ error: 'Tracks GeoJSON file not found' });
+    return res.json(tracksGeoJSONCache);
   } catch (err: any) {
     console.error('Error reading tracks GeoJSON:', err);
     return res.status(500).json({ error: 'Failed to read tracks GeoJSON' });
