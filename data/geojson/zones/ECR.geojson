@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "ECR",
+        "name": "East Central Railway",
+        "color": "#DCEDC8",
+        "division": "Danapur, Dhanbad, Pt Deen Dayal, Samastipur, Sonpur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              82,
+              22
+            ],
+            [
+              88,
+              22
+            ],
+            [
+              88,
+              27.5
+            ],
+            [
+              82,
+              27.5
+            ],
+            [
+              82,
+              22
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

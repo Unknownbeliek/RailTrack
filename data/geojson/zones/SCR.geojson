@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "SCR",
+        "name": "South Central Railway",
+        "color": "#E1BEE7",
+        "division": "Secunderabad, Hyderabad, Vijayawada, Guntur, Guntakal, Nanded"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.5,
+              13.5
+            ],
+            [
+              82.5,
+              13.5
+            ],
+            [
+              82.5,
+              20
+            ],
+            [
+              76.5,
+              20
+            ],
+            [
+              76.5,
+              13.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "zone": "NR", "name": "Northern Railway", "color": "#C8E6C9", "division": "Delhi, Ambala, Firozpur, Lucknow NR, Moradabad" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [73.5, 28.6],
+          [81.5, 28.6],
+          [81.5, 31.0],
+          [80.0, 32.5],
+          [77.5, 35.5],
+          [74.5, 34.0],
+          [73.5, 31.5],
+          [73.5, 28.6]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "NWR", "name": "North Western Railway", "color": "#FFECB3", "division": "Jaipur, Ajmer, Bikaner, Jodhpur" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [68.2, 23.5],
+          [78.0, 23.5],
+          [78.0, 30.5],
+          [73.5, 30.5],
+          [68.2, 27.0],
+          [68.2, 23.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "NCR", "name": "North Central Railway", "color": "#BBDEFB", "division": "Prayagraj, Agra, Jhansi" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [77.5, 24.0],
+          [83.5, 24.0],
+          [83.5, 28.6],
+          [77.5, 28.6],
+          [77.5, 24.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "NER", "name": "North Eastern Railway", "color": "#B3E5FC", "division": "Izzatnagar, Lucknow NER, Varanasi" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [80.5, 26.0],
+          [85.5, 26.0],
+          [85.5, 29.5],
+          [80.5, 29.5],
+          [80.5, 26.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "ECR", "name": "East Central Railway", "color": "#DCEDC8", "division": "Danapur, Dhanbad, Pt Deen Dayal, Samastipur, Sonpur" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [82.0, 22.0],
+          [88.0, 22.0],
+          [88.0, 27.5],
+          [82.0, 27.5],
+          [82.0, 22.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "ER", "name": "Eastern Railway", "color": "#FFF9C4", "division": "Howrah, Sealdah, Asansol, Malda" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [86.0, 21.0],
+          [89.5, 21.0],
+          [89.5, 27.0],
+          [86.0, 27.0],
+          [86.0, 21.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "ECoR", "name": "East Coast Railway", "color": "#B2EBF2", "division": "Khurda Road, Sambalpur, Waltair" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [81.5, 17.0],
+          [87.5, 17.0],
+          [87.5, 22.5],
+          [81.5, 22.5],
+          [81.5, 17.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "SER", "name": "South Eastern Railway", "color": "#FFCCBC", "division": "Adra, Chakradharpur, Kharagpur, Ranchi" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [84.0, 19.5],
+          [88.5, 19.5],
+          [88.5, 24.0],
+          [84.0, 24.0],
+          [84.0, 19.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "SECR", "name": "South East Central Railway", "color": "#D7CCC8", "division": "Bilaspur, Nagpur SEC, Raipur" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [79.5, 19.0],
+          [84.5, 19.0],
+          [84.5, 24.0],
+          [79.5, 24.0],
+          [79.5, 19.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "SR", "name": "Southern Railway", "color": "#B2DFDB", "division": "Chennai, Madurai, Palakkad, Salem, Thiruvananthapuram, Tiruchchirappalli" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [75.0, 8.0],
+          [80.5, 8.0],
+          [80.5, 13.5],
+          [77.0, 13.5],
+          [75.0, 11.5],
+          [75.0, 8.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "SWR", "name": "South Western Railway", "color": "#C5CAE9", "division": "Bengaluru, Hubballi, Mysuru" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [73.5, 11.5],
+          [78.5, 11.5],
+          [78.5, 17.0],
+          [73.5, 17.0],
+          [73.5, 11.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "SCR", "name": "South Central Railway", "color": "#E1BEE7", "division": "Secunderabad, Hyderabad, Vijayawada, Guntur, Guntakal, Nanded" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [76.5, 13.5],
+          [82.5, 13.5],
+          [82.5, 20.0],
+          [76.5, 20.0],
+          [76.5, 13.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "WCR", "name": "West Central Railway", "color": "#F0F4C3", "division": "Jabalpur, Bhopal, Kota" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [75.0, 21.0],
+          [81.5, 21.0],
+          [81.5, 26.0],
+          [75.0, 26.0],
+          [75.0, 21.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "WR", "name": "Western Railway", "color": "#F8BBD0", "division": "Mumbai WR, Vadodara, Ahmedabad, Rajkot, Ratlam, Bhavnagar" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [68.0, 18.0],
+          [77.0, 18.0],
+          [77.0, 25.0],
+          [68.0, 25.0],
+          [68.0, 18.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "CR", "name": "Central Railway", "color": "#FFE0B2", "division": "Mumbai CR, Bhusawal, Nagpur CR, Pune, Solapur" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [72.5, 15.5],
+          [81.0, 15.5],
+          [81.0, 22.0],
+          [72.5, 22.0],
+          [72.5, 15.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "NFR", "name": "Northeast Frontier Railway", "color": "#B39DDB", "division": "Alipurduar, Katihar, Lumding, Rangiya, Tinsukia" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [88.0, 22.0],
+          [97.5, 22.0],
+          [97.5, 28.5],
+          [88.0, 28.5],
+          [88.0, 22.0]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "zone": "KR", "name": "Konkan Railway", "color": "#80CBC4", "division": "Konkan" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [72.0, 12.0],
+          [74.5, 12.0],
+          [74.5, 20.5],
+          [72.0, 20.5],
+          [72.0, 12.0]
+        ]]
+      }
+    }
+  ]
+}

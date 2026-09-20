@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "CR",
+        "name": "Central Railway",
+        "color": "#FFE0B2",
+        "division": "Mumbai CR, Bhusawal, Nagpur CR, Pune, Solapur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.5,
+              15.5
+            ],
+            [
+              81,
+              15.5
+            ],
+            [
+              81,
+              22
+            ],
+            [
+              72.5,
+              22
+            ],
+            [
+              72.5,
+              15.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

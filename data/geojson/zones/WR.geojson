@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "WR",
+        "name": "Western Railway",
+        "color": "#F8BBD0",
+        "division": "Mumbai WR, Vadodara, Ahmedabad, Rajkot, Ratlam, Bhavnagar"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              68,
+              18
+            ],
+            [
+              77,
+              18
+            ],
+            [
+              77,
+              25
+            ],
+            [
+              68,
+              25
+            ],
+            [
+              68,
+              18
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

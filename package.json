@@ -10,7 +10,10 @@
   "scripts": {
     "dev:web": "npm --prefix apps/web run dev",
     "build:web": "npm --prefix apps/web run build",
-    "start:gateway": "ts-node services/gateway/server.ts"
+    "start:gateway": "ts-node services/gateway/server.ts",
+    "patch:speeds": "node scripts/patch-speeds.js",
+    "build:tiles": "tippecanoe -o data/tiles/india-rail.pmtiles -Z4 -z14 --drop-densest-as-needed data/geojson/tracks-with-speed.geojson data/geojson/stations.geojson",
+    "download:osm": "bash scripts/download-osm.sh"
   },
   "dependencies": {
     "@turf/turf": "^7.1.0",

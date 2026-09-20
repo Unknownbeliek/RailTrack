@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "code": "NDLS", "name": "New Delhi", "zone": "NR", "division": "Delhi", "platforms": 16, "hasLoopLine": true, "loopLineCount": 4 },
+      "geometry": { "type": "Point", "coordinates": [77.2197, 28.6431] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "GZB", "name": "Ghaziabad Jn", "zone": "NR", "division": "Delhi", "platforms": 6, "hasLoopLine": true, "loopLineCount": 3 },
+      "geometry": { "type": "Point", "coordinates": [77.4378, 28.6635] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "ALJN", "name": "Aligarh Jn", "zone": "NCR", "division": "Prayagraj", "platforms": 7, "hasLoopLine": true, "loopLineCount": 2 },
+      "geometry": { "type": "Point", "coordinates": [78.0776, 27.8914] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "TDL", "name": "Tundla Jn", "zone": "NCR", "division": "Prayagraj", "platforms": 5, "hasLoopLine": true, "loopLineCount": 5 },
+      "geometry": { "type": "Point", "coordinates": [78.2411, 27.2063] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "FZD", "name": "Firozabad", "zone": "NCR", "division": "Prayagraj", "platforms": 3, "hasLoopLine": true, "loopLineCount": 2 },
+      "geometry": { "type": "Point", "coordinates": [78.3965, 27.1511] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "ETW", "name": "Etawah Jn", "zone": "NCR", "division": "Prayagraj", "platforms": 5, "hasLoopLine": true, "loopLineCount": 2 },
+      "geometry": { "type": "Point", "coordinates": [79.0253, 26.7788] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "CNB", "name": "Kanpur Central", "zone": "NCR", "division": "Prayagraj", "platforms": 10, "hasLoopLine": true, "loopLineCount": 6 },
+      "geometry": { "type": "Point", "coordinates": [80.3507, 26.4542] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "PRYJ", "name": "Prayagraj Jn", "zone": "NCR", "division": "Prayagraj", "platforms": 10, "hasLoopLine": true, "loopLineCount": 4 },
+      "geometry": { "type": "Point", "coordinates": [81.8333, 25.4484] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "DDU", "name": "Pt. Deen Dayal Upadhyaya Jn", "zone": "ECR", "division": "DDU", "platforms": 8, "hasLoopLine": true, "loopLineCount": 8 },
+      "geometry": { "type": "Point", "coordinates": [83.1189, 25.2818] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "PNBE", "name": "Patna Jn", "zone": "ECR", "division": "Danapur", "platforms": 10, "hasLoopLine": true, "loopLineCount": 4 },
+      "geometry": { "type": "Point", "coordinates": [85.1376, 25.6039] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "code": "RJPB", "name": "Rajendra Nagar Terminal", "zone": "ECR", "division": "Danapur", "platforms": 4, "hasLoopLine": true, "loopLineCount": 3 },
+      "geometry": { "type": "Point", "coordinates": [85.1611, 25.5997] }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+# Indian Railways Permissible Speed Patches - Curated from WTT + OSM
+# Format: from_station,to_station,section_name,line,max_speed_kmph,source,updated,notes
+from_station,to_station,section_name,line,max_speed_kmph,source,updated,notes
+NDLS,GZB,Delhi-Ghaziabad,NR Main,130,WTT,2024-11,Quadruple electrified
+GZB,ALJN,Ghaziabad-Aligarh,NR Main,130,WTT,2024-11,130 MPS Rajdhani route
+ALJN,TDL,Aligarh-Tundla,NCR Main,130,WTT,2024-11,High density
+TDL,AGC,Tundla-Agra,NCR Branch,110,OSM,2024-06,Branch line
+TDL,FZD,Tundla-Firozabad,NCR Main,130,WTT,2024-11,
+FZD,ETW,Firozabad-Etawah,NCR Main,130,WTT,2024-11,
+ETW,CNB,Etawah-Kanpur,NCR Main,130,WTT,2024-11,130 MPS
+CNB,PRYJ,Kanpur-Prayagraj,NCR Main,130,WTT,2024-11,
+PRYJ,DDU,Prayagraj-PtDeenDayal,NCR Main,130,WTT,2024-11,130 MPS
+DDU,PNBE,DDU-Patna,ECR Main,130,WTT,2024-11,
+PNBE,HWH,Patna-Howrah,ECR/ER Main,130,WTT,2024-11,Quad
+NDLS,AGC,Delhi-Agra,NR Main,130,WTT,2024-11,Gatimaan route 160 partial
+AGC,JHS,Agra-Jhansi,NCR Main,130,WTT,2024-11,
+JHS,BPL,Jhansi-Bhopal,WCR Main,130,WTT,2024-11,
+BPL,NGP,Bhopal-Nagpur,CR Main,130,WTT,2024-11,
+NGP,BZA,Nagpur-Vijayawada,CR/SCR Main,110,WTT,2024-08,
+BZA,MAS,Vijayawada-Chennai,SR Main,130,WTT,2024-11,
+NDLS,KOTA,Delhi-Kota,WR Main,130,WTT,2024-11,
+KOTA,BRC,Kota-Vadodara,WR Main,130,WTT,2024-11,
+BRC,BCT,Vadodara-Mumbai,WR Main,130,WTT,2024-11,130 MPS Mumbai-Delhi
+BCT,PUNE,Mumbai-Pune,CR Main,110,WTT,2024-08,Ghat section 60
+PUNE,SBC,Pune-Bengaluru,CR/SWR Main,110,WTT,2024-08,
+MAS,SBC,Chennai-Bengaluru,SR Main,110,WTT,2024-08,110 MPS
+SBC,UBL,Bengaluru-Hubballi,SWR Branch,100,WTT,2024-06,
+HWH,KGP,Howrah-Kharagpur,SER Main,130,WTT,2024-11,
+KGP,BBS,Kharagpur-Bhubaneswar,ECoR Main,130,WTT,2024-11,
+BBS,VSKP,Bhubaneswar-Vizag,ECoR Main,110,WTT,2024-08,
+VSKP,BZA,Vizag-Vijayawada,ECoR Main,110,WTT,2024-08,
+CNB,LKO,Kanpur-Lucknow,NR Branch,110,WTT,2024-08,
+LKO,GKP,Lucknow-Gorakhpur,NER Branch,100,WTT,2024-06,
+ROHA,MAO,Roha-Madgaon,KR Main,110,OSM,2024-06,Konkan 110
+GZB,TDL,Ghaziabad-Tundla Quad,NR Main,130,WTT,2024-11,Quad track

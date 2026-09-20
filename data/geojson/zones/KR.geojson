@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "KR",
+        "name": "Konkan Railway",
+        "color": "#80CBC4",
+        "division": "Konkan"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72,
+              12
+            ],
+            [
+              74.5,
+              12
+            ],
+            [
+              74.5,
+              20.5
+            ],
+            [
+              72,
+              20.5
+            ],
+            [
+              72,
+              12
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

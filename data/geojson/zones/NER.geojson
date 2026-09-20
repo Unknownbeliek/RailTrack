@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "NER",
+        "name": "North Eastern Railway",
+        "color": "#B3E5FC",
+        "division": "Izzatnagar, Lucknow NER, Varanasi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              80.5,
+              26
+            ],
+            [
+              85.5,
+              26
+            ],
+            [
+              85.5,
+              29.5
+            ],
+            [
+              80.5,
+              29.5
+            ],
+            [
+              80.5,
+              26
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

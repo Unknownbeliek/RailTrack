@@ -1,0 +1,176 @@
+{
+  "version": 8,
+  "name": "TrackPulse Dark - IR Zones + Tracks + Speeds",
+  "metadata": {
+    "description": "Dark basemap with IR zone fills, track lines, siding, speed labels - IRI replica",
+    "author": "TrackPulse"
+  },
+  "sources": {
+    "carto-dark": {
+      "type": "raster",
+      "tiles": ["https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"],
+      "tileSize": 256,
+      "attribution": "© CARTO © OSM"
+    },
+    "ir-zones": {
+      "type": "geojson",
+      "data": "/geojson/zones-all.geojson"
+    },
+    "india-rail": {
+      "type": "geojson",
+      "data": "/geojson/tracks-with-speed.geojson"
+    },
+    "stations": {
+      "type": "geojson",
+      "data": "/geojson/stations.geojson"
+    },
+    "speed-badges": {
+      "type": "geojson",
+      "data": "/geojson/speed-badges.geojson"
+    }
+  },
+  "sprite": "https://demotiles.maplibre.org/styles/osm-bright-gl-style/sprite",
+  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#0A0E17" }
+    },
+    {
+      "id": "carto-dark-base",
+      "type": "raster",
+      "source": "carto-dark",
+      "paint": { "raster-opacity": 0.85 }
+    },
+    {
+      "id": "zones-fill",
+      "type": "fill",
+      "source": "ir-zones",
+      "paint": {
+        "fill-color": [
+          "match", ["get", "zone"],
+          "NR", "#C8E6C9",
+          "NCR", "#BBDEFB",
+          "CR", "#FFE0B2",
+          "WR", "#F8BBD0",
+          "SCR", "#E1BEE7",
+          "SR", "#B2DFDB",
+          "ER", "#FFF9C4",
+          "ECR", "#DCEDC8",
+          "NER", "#B3E5FC",
+          "NFR", "#C5CAE9",
+          "SECR", "#FFCCBC",
+          "SWR", "#D7CCC8",
+          "WCR", "#F0F4C3",
+          "ECoR", "#B2EBF2",
+          "NWR", "#FFECB3",
+          "SER", "#FFCCBC",
+          "KR", "#80CBC4",
+          "#1a1a2e"
+        ],
+        "fill-opacity": 0.28
+      }
+    },
+    {
+      "id": "zones-outline",
+      "type": "line",
+      "source": "ir-zones",
+      "paint": {
+        "line-color": ["get", "color"],
+        "line-width": 1.2,
+        "line-opacity": 0.5,
+        "line-dasharray": [2, 2]
+      }
+    },
+    {
+      "id": "zones-label",
+      "type": "symbol",
+      "source": "ir-zones",
+      "minzoom": 4,
+      "maxzoom": 8,
+      "layout": {
+        "text-field": ["get", "zone"],
+        "text-size": 14,
+        "text-font": ["Open Sans Bold"],
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "#94A3B8",
+        "text-halo-color": "#0A0E17",
+        "text-halo-width": 2,
+        "text-opacity": 0.7
+      }
+    },
+    {
+      "id": "tracks-main-glow",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["all", ["==", ["get", "railway"], "rail"], ["!=", ["get", "service"], "siding"], ["!=", ["get", "service"], "yard"], ["==", ["get", "usage"], "main"]],
+      "layout": { "line-join": "round", "line-cap": "round" },
+      "paint": {
+        "line-color": "#22C55E",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 4, 1, 8, 2.5, 12, 5, 14, 8],
+        "line-opacity": 0.25
+      }
+    },
+    {
+      "id": "tracks-main",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["all", ["==", ["get", "railway"], "rail"], ["!=", ["get", "service"], "siding"], ["!=", ["get", "service"], "yard"], ["==", ["get", "usage"], "main"]],
+      "layout": { "line-join": "round", "line-cap": "round" },
+      "paint": {
+        "line-color": "#22C55E",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.6, 8, 1.2, 12, 2.5, 14, 4],
+        "line-opacity": 0.95
+      }
+    },
+    {
+      "id": "tracks-branch",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["all", ["==", ["get", "railway"], "rail"], ["==", ["get", "usage"], "branch"]],
+      "layout": { "line-join": "round", "line-cap": "round" },
+      "paint": {
+        "line-color": "#4DA8FF",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.4, 8, 0.9, 12, 1.8, 14, 3],
+        "line-opacity": 0.75
+      }
+    },
+    {
+      "id": "tracks-siding",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["in", ["get", "service"], ["literal", ["siding", "yard"]]],
+      "layout": { "line-join": "round", "line-cap": "round" },
+      "paint": {
+        "line-color": "#FB923C",
+        "line-width": 1.5,
+        "line-dasharray": [2, 1],
+        "line-opacity": 0.9
+      }
+    },
+    {
+      "id": "speed-labels",
+      "type": "symbol",
+      "source": "india-rail",
+      "minzoom": 7,
+      "filter": ["all", ["has", "maxspeed"], ["!=", ["get", "service"], "siding"], ["!=", ["get", "service"], "yard"]],
+      "layout": {
+        "symbol-placement": "line",
+        "text-field": ["concat", ["get", "maxspeed"], " kmph"],
+        "text-size": 11,
+        "text-font": ["Open Sans Semibold"],
+        "text-pitch-alignment": "viewport",
+        "text-allow-overlap": false,
+        "symbol-spacing": 400
+      },
+      "paint": {
+        "text-color": "#0EA5E9",
+        "text-halo-color": "#0A0E17",
+        "text-halo-width": 2
+      }
+    }
+  ]
+}

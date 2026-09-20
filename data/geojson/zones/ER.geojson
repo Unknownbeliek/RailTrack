@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "ER",
+        "name": "Eastern Railway",
+        "color": "#FFF9C4",
+        "division": "Howrah, Sealdah, Asansol, Malda"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86,
+              21
+            ],
+            [
+              89.5,
+              21
+            ],
+            [
+              89.5,
+              27
+            ],
+            [
+              86,
+              27
+            ],
+            [
+              86,
+              21
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
