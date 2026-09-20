@@ -1,0 +1,413 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "NDLS_HWH_MAIN",
+        "name": "Delhi - Kanpur - Prayagraj - Pt Deen Dayal - Patna - Howrah Main",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "maxspeed:railway": "130",
+        "zone": "NCR",
+        "section": "NDLS-HWH"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.2197, 28.6431],
+          [77.4378, 28.6635],
+          [77.8, 28.4],
+          [78.0776, 27.8914],
+          [78.2411, 27.2063],
+          [78.3965, 27.1511],
+          [79.0253, 26.7788],
+          [80.3507, 26.4542],
+          [81.8333, 25.4484],
+          [83.1189, 25.2818],
+          [84.5, 25.4],
+          [85.1376, 25.6039],
+          [86.5, 24.8],
+          [87.5, 23.8],
+          [88.3639, 22.5726]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "NDLS_BCT_MAIN",
+        "name": "Delhi - Mathura - Kota - Vadodara - Mumbai Main",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "zone": "WR",
+        "section": "NDLS-BCT"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.2197, 28.6431],
+          [77.641, 28.0],
+          [77.6737, 27.4924],
+          [76.5, 26.0],
+          [75.7873, 24.5712],
+          [75.0, 23.0],
+          [73.7281, 22.3072],
+          [72.8777, 19.076],
+          [72.8777, 19.076]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BCT_MAS_MAIN",
+        "name": "Mumbai - Pune - Solapur - Guntakal - Chennai Main",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "CR",
+        "section": "BCT-MAS"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [72.8777, 19.076],
+          [73.8567, 18.5204],
+          [75.0, 17.5],
+          [76.5, 15.5],
+          [78.0, 13.5],
+          [80.2707, 13.0827]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "HWH_MAS_MAIN",
+        "name": "Howrah - Kharagpur - Bhubaneswar - Vizag - Vijayawada - Chennai",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "zone": "SER",
+        "section": "HWH-MAS"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [88.3639, 22.5726],
+          [87.3236, 22.3397],
+          [85.8245, 20.2961],
+          [83.2185, 17.6868],
+          [80.62, 16.5],
+          [80.2707, 13.0827]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "NDLS_AGC_BRANCH",
+        "name": "Tundla - Agra Cantt Branch",
+        "railway": "rail",
+        "usage": "branch",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "NCR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [78.2411, 27.2063],
+          [78.0103, 27.1807]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "AGC_BPL_MAIN",
+        "name": "Agra - Jhansi - Bhopal Main",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "zone": "WCR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [78.0103, 27.1807],
+          [78.5, 26.0],
+          [78.57, 25.44],
+          [77.4126, 23.2599]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BPL_NGP_MAIN",
+        "name": "Bhopal - Itarsi - Nagpur Main",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "zone": "CR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.4126, 23.2599],
+          [77.75, 22.6],
+          [79.093, 21.1458]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "CNB_LKO_BRANCH",
+        "name": "Kanpur - Lucknow Branch",
+        "railway": "rail",
+        "usage": "branch",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "NR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.3507, 26.4542],
+          [80.9462, 26.8467]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "LKO_GKP_BRANCH",
+        "name": "Lucknow - Gonda - Gorakhpur Branch",
+        "railway": "rail",
+        "usage": "branch",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "100",
+        "zone": "NER"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.9462, 26.8467],
+          [81.5, 27.0],
+          [83.3732, 26.7606]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "KONKAN_MAIN",
+        "name": "Roha - Ratnagiri - Madgaon Konkan Railway",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "KR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [73.1, 18.4],
+          [73.3, 17.0],
+          [73.7, 15.5],
+          [74.1, 12.5]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "MAS_SBC_BRANCH",
+        "name": "Chennai - Katpadi - Bengaluru",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "SR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2707, 13.0827],
+          [79.1, 12.9],
+          [77.5946, 12.9716]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "SBC_UBL_BRANCH",
+        "name": "Bengaluru - Hubballi",
+        "railway": "rail",
+        "usage": "branch",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "100",
+        "zone": "SWR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.5946, 12.9716],
+          [76.0, 13.5],
+          [75.124, 15.3647]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "TDL_LOOP_1",
+        "name": "Tundla Jn Loop 1",
+        "railway": "rail",
+        "service": "siding",
+        "gauge": "1676",
+        "maxspeed": "30",
+        "zone": "NCR",
+        "station": "TDL"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [78.238, 27.2075],
+          [78.2413, 27.2065],
+          [78.2445, 27.2055]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "TDL_LOOP_2",
+        "name": "Tundla Jn Loop 2",
+        "railway": "rail",
+        "service": "siding",
+        "gauge": "1676",
+        "maxspeed": "30",
+        "zone": "NCR",
+        "station": "TDL"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [78.2375, 27.208],
+          [78.241, 27.207],
+          [78.245, 27.206]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "CNB_YARD",
+        "name": "Kanpur Central Yard",
+        "railway": "rail",
+        "service": "yard",
+        "gauge": "1676",
+        "maxspeed": "15",
+        "zone": "NCR",
+        "station": "CNB"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.348, 26.456],
+          [80.353, 26.454],
+          [80.358, 26.452]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "NDLS_YARD",
+        "name": "New Delhi Yard",
+        "railway": "rail",
+        "service": "yard",
+        "gauge": "1676",
+        "maxspeed": "15",
+        "zone": "NR",
+        "station": "NDLS"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.215, 28.645],
+          [77.22, 28.643],
+          [77.225, 28.641]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "GZB_AGC_QUAD",
+        "name": "Ghaziabad - Aligarh Quad Track",
+        "railway": "rail",
+        "usage": "main",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "130",
+        "railway:track_ref": "1",
+        "zone": "NR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.4378, 28.6635],
+          [77.6, 28.5],
+          [78.0776, 27.8914]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PRYJ_MZP_BRANCH",
+        "name": "Prayagraj - Mirzapur Branch",
+        "railway": "rail",
+        "usage": "branch",
+        "gauge": "1676",
+        "electrified": "contact_line",
+        "maxspeed": "110",
+        "zone": "NCR"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [81.8333, 25.4484],
+          [82.5, 25.3],
+          [83.1189, 25.2818]
+        ]
+      }
+    }
+  ]
+}

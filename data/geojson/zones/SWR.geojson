@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "SWR",
+        "name": "South Western Railway",
+        "color": "#C5CAE9",
+        "division": "Bengaluru, Hubballi, Mysuru"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              73.5,
+              11.5
+            ],
+            [
+              78.5,
+              11.5
+            ],
+            [
+              78.5,
+              17
+            ],
+            [
+              73.5,
+              17
+            ],
+            [
+              73.5,
+              11.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

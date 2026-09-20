@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "NFR",
+        "name": "Northeast Frontier Railway",
+        "color": "#B39DDB",
+        "division": "Alipurduar, Katihar, Lumding, Rangiya, Tinsukia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              88,
+              22
+            ],
+            [
+              97.5,
+              22
+            ],
+            [
+              97.5,
+              28.5
+            ],
+            [
+              88,
+              28.5
+            ],
+            [
+              88,
+              22
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

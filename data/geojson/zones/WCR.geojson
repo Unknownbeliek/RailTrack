@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "WCR",
+        "name": "West Central Railway",
+        "color": "#F0F4C3",
+        "division": "Jabalpur, Bhopal, Kota"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              75,
+              21
+            ],
+            [
+              81.5,
+              21
+            ],
+            [
+              81.5,
+              26
+            ],
+            [
+              75,
+              26
+            ],
+            [
+              75,
+              21
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "NWR",
+        "name": "North Western Railway",
+        "color": "#FFECB3",
+        "division": "Jaipur, Ajmer, Bikaner, Jodhpur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              68.2,
+              23.5
+            ],
+            [
+              78,
+              23.5
+            ],
+            [
+              78,
+              30.5
+            ],
+            [
+              73.5,
+              30.5
+            ],
+            [
+              68.2,
+              27
+            ],
+            [
+              68.2,
+              23.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

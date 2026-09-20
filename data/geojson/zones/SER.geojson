@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "SER",
+        "name": "South Eastern Railway",
+        "color": "#FFCCBC",
+        "division": "Adra, Chakradharpur, Kharagpur, Ranchi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84,
+              19.5
+            ],
+            [
+              88.5,
+              19.5
+            ],
+            [
+              88.5,
+              24
+            ],
+            [
+              84,
+              24
+            ],
+            [
+              84,
+              19.5
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

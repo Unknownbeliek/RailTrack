@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone": "ECoR",
+        "name": "East Coast Railway",
+        "color": "#B2EBF2",
+        "division": "Khurda Road, Sambalpur, Waltair"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              81.5,
+              17
+            ],
+            [
+              87.5,
+              17
+            ],
+            [
+              87.5,
+              22.5
+            ],
+            [
+              81.5,
+              22.5
+            ],
+            [
+              81.5,
+              17
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

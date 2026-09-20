@@ -1,0 +1,5 @@
+# Optional geometry fixes for OSM import - manual corrections
+# id,field,old_value,new_value,reason,source
+# Example:
+# NDLS_HWH_MAIN,coordinates,fix curvature near Etawah,corrected with GPS trace,railfan
+# TDL_LOOP_1,maxspeed,15,30,observed 30 kmph loop entry,WTT
