@@ -8,6 +8,12 @@
     "services/*"
   ],
   "scripts": {
+    "dev:client": "npm --prefix apps/client run dev",
+    "build:client": "npm --prefix apps/client run build",
+    "dev:server": "npm --prefix apps/server run dev",
+    "build:server": "npm --prefix apps/server run build",
+    "start:server": "npm --prefix apps/server run start",
+    "build": "npm run build:server && npm run build:client",
     "dev:web": "npm --prefix apps/web run dev",
     "build:web": "npm --prefix apps/web run build",
     "start:gateway": "ts-node services/gateway/server.ts",

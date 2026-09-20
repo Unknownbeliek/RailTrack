@@ -1,0 +1,74 @@
+{
+  "version": 8,
+  "name": "TrackPulse Light - IR Zones + Tracks",
+  "sources": {
+    "carto-light": {
+      "type": "raster",
+      "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"],
+      "tileSize": 256
+    },
+    "ir-zones": { "type": "geojson", "data": "/geojson/zones-all.geojson" },
+    "india-rail": { "type": "geojson", "data": "/geojson/tracks-with-speed.geojson" },
+    "stations": { "type": "geojson", "data": "/geojson/stations.geojson" }
+  },
+  "layers": [
+    { "id": "background", "type": "background", "paint": { "background-color": "#F8FAFC" } },
+    { "id": "carto-light-base", "type": "raster", "source": "carto-light", "paint": { "raster-opacity": 0.9 } },
+    {
+      "id": "zones-fill",
+      "type": "fill",
+      "source": "ir-zones",
+      "paint": {
+        "fill-color": [
+          "match", ["get", "zone"],
+          "NR", "#C8E6C9", "NCR", "#BBDEFB", "CR", "#FFE0B2", "WR", "#F8BBD0",
+          "SCR", "#E1BEE7", "SR", "#B2DFDB", "ER", "#FFF9C4", "ECR", "#DCEDC8",
+          "NER", "#B3E5FC", "NFR", "#C5CAE9", "SECR", "#FFCCBC", "SWR", "#D7CCC8",
+          "WCR", "#F0F4C3", "ECoR", "#B2EBF2", "NWR", "#FFECB3", "SER", "#FFCCBC",
+          "KR", "#80CBC4", "#E5E7EB"
+        ],
+        "fill-opacity": 0.4
+      }
+    },
+    {
+      "id": "zones-outline",
+      "type": "line",
+      "source": "ir-zones",
+      "paint": { "line-color": "#94A3B8", "line-width": 1, "line-opacity": 0.6, "line-dasharray": [2,2] }
+    },
+    {
+      "id": "tracks-main",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["all", ["==", ["get", "railway"], "rail"], ["==", ["get", "usage"], "main"]],
+      "paint": { "line-color": "#16A34A", "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.8, 12, 3, 14, 5] }
+    },
+    {
+      "id": "tracks-branch",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["==", ["get", "usage"], "branch"],
+      "paint": { "line-color": "#0284C7", "line-width": 2 }
+    },
+    {
+      "id": "tracks-siding",
+      "type": "line",
+      "source": "india-rail",
+      "filter": ["in", ["get", "service"], ["literal", ["siding", "yard"]]],
+      "paint": { "line-color": "#EA580C", "line-width": 1.5, "line-dasharray": [2,1] }
+    },
+    {
+      "id": "speed-labels",
+      "type": "symbol",
+      "source": "india-rail",
+      "minzoom": 7,
+      "filter": ["has", "maxspeed"],
+      "layout": {
+        "symbol-placement": "line",
+        "text-field": ["concat", ["get", "maxspeed"], " kmph"],
+        "text-size": 11
+      },
+      "paint": { "text-color": "#0284C7", "text-halo-color": "#FFF", "text-halo-width": 2 }
+    }
+  ]
+}
