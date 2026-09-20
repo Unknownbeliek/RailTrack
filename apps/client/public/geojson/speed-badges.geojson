@@ -1,0 +1,243 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "NDLS-HWH",
+        "name": "Delhi - Kanpur - Prayagraj - Pt Deen Dayal - Patna - Howrah Main",
+        "zone": "NCR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.3507,
+          26.4542
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "NDLS-BCT",
+        "name": "Delhi - Mathura - Kota - Vadodara - Mumbai Main",
+        "zone": "WR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7873,
+          24.5712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "110",
+        "section": "BCT-MAS",
+        "name": "Mumbai - Pune - Solapur - Guntakal - Chennai Main",
+        "zone": "CR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.75,
+          16.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "HWH-MAS",
+        "name": "Howrah - Kharagpur - Bhubaneswar - Vizag - Vijayawada - Chennai",
+        "zone": "SER",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.5215,
+          18.99145
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "NDLS_AGC_BRANCH",
+        "name": "Tundla - Agra Cantt Branch",
+        "zone": "NCR",
+        "usage": "branch"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.1257,
+          27.1935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "AGC_BPL_MAIN",
+        "name": "Agra - Jhansi - Bhopal Main",
+        "zone": "WCR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.535,
+          25.72
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "BPL_NGP_MAIN",
+        "name": "Bhopal - Itarsi - Nagpur Main",
+        "zone": "CR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.75,
+          22.6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "110",
+        "section": "CNB_LKO_BRANCH",
+        "name": "Kanpur - Lucknow Branch",
+        "zone": "NR",
+        "usage": "branch"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.64845,
+          26.65045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "100",
+        "section": "LKO_GKP_BRANCH",
+        "name": "Lucknow - Gonda - Gorakhpur Branch",
+        "zone": "NER",
+        "usage": "branch"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          81.5,
+          27
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "110",
+        "section": "KONKAN_MAIN",
+        "name": "Roha - Ratnagiri - Madgaon Konkan Railway",
+        "zone": "KR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.5,
+          16.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "110",
+        "section": "MAS_SBC_BRANCH",
+        "name": "Chennai - Katpadi - Bengaluru",
+        "zone": "SR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.1,
+          12.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "100",
+        "section": "SBC_UBL_BRANCH",
+        "name": "Bengaluru - Hubballi",
+        "zone": "SWR",
+        "usage": "branch"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76,
+          13.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "130",
+        "section": "GZB_AGC_QUAD",
+        "name": "Ghaziabad - Aligarh Quad Track",
+        "zone": "NR",
+        "usage": "main"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.6,
+          28.5
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "maxspeed": "110",
+        "section": "PRYJ_MZP_BRANCH",
+        "name": "Prayagraj - Mirzapur Branch",
+        "zone": "NCR",
+        "usage": "branch"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          82.5,
+          25.3
+        ]
+      }
+    }
+  ]
+}
