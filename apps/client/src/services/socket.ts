@@ -7,38 +7,50 @@ let socket: Socket | null = null;
 export function initSocket() {
   if (socket) return socket;
 
-  // In production / dev, connect to window.location.origin (proxied by Vite) or configured backend URL
   socket = io({
     transports: ['websocket', 'polling'],
-    reconnectionAttempts: 5,
+    reconnectionAttempts: 20,
     reconnectionDelay: 1000,
   });
 
   socket.on('connect', () => {
-    console.log('[Socket.io Client] Connected to TrackPulse backend:', socket?.id);
+    console.log('[Socket] connected', socket?.id);
+    useTrainStore.getState().setBackendOnline(true);
   });
 
-  socket.on('train:all', (trains: TrainState[]) => {
-    console.log('[Socket.io Client] Received initial train list:', trains.length);
-    useTrainStore.getState().setTrains(trains);
-  });
+  const applyList = (trains: TrainState[]) => {
+    if (Array.isArray(trains) && trains.length) {
+      useTrainStore.getState().setTrains(trains);
+    }
+  };
+
+  socket.on('train:all', applyList);
+  socket.on('trains:snapshot', applyList);
 
   socket.on('train:state', (train: TrainState) => {
-    useTrainStore.getState().updateTrain(train);
+    if (train?.trainNo) useTrainStore.getState().updateTrain(train);
   });
 
   socket.on('simulation:step', (data: { step: number; message: string }) => {
-    console.log('[Socket.io Client] Simulation step:', data.step, data.message);
     useTrainStore.getState().setSimulationStep(data.step);
   });
 
   socket.on('simulation:reset', () => {
-    console.log('[Socket.io Client] Simulation reset');
     useTrainStore.getState().setSimulationStep(0);
   });
 
+  socket.on('simulation:focus', (data: { lng: number; lat: number; zoom?: number }) => {
+    if (data?.lng && data?.lat) {
+      useTrainStore.getState().setFocusRequest({
+        lng: data.lng,
+        lat: data.lat,
+        zoom: data.zoom || 9,
+      });
+    }
+  });
+
   socket.on('disconnect', () => {
-    console.log('[Socket.io Client] Disconnected from server');
+    useTrainStore.getState().setBackendOnline(false);
   });
 
   return socket;
@@ -49,25 +61,17 @@ export function getSocket(): Socket | null {
 }
 
 export function emitGPSReport(report: any) {
-  if (socket?.connected) {
-    socket.emit('gps:report', report);
-  }
+  if (socket?.connected) socket.emit('gps:report', report);
 }
 
 export function subscribeToTrain(trainNo: string) {
-  if (socket?.connected) {
-    socket.emit('train:subscribe', trainNo);
-  }
+  if (socket?.connected) socket.emit('train:subscribe', trainNo);
 }
 
 export function triggerSocketSimulation() {
-  if (socket?.connected) {
-    socket.emit('simulation:trigger');
-  }
+  if (socket?.connected) socket.emit('simulation:trigger');
 }
 
 export function resetSocketSimulation() {
-  if (socket?.connected) {
-    socket.emit('simulation:reset');
-  }
+  if (socket?.connected) socket.emit('simulation:reset');
 }

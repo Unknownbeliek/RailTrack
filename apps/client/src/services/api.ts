@@ -108,3 +108,15 @@ export async function apiGetTracks(): Promise<any> {
   const res = await fetch(`${API_BASE}/tracks`);
   return res.json();
 }
+
+export async function apiGetTracksGeoJSON(): Promise<any> {
+  const res = await fetch(`${API_BASE}/tracks/geojson`);
+  if (!res.ok) throw new Error('Failed to fetch tracks');
+  return res.json();
+}
+
+export async function apiGetStationsGeoJSON(): Promise<any> {
+  const res = await fetch(`${API_BASE}/stations/geojson`);
+  if (!res.ok) throw new Error('Failed to fetch stations geojson');
+  return res.json();
+}

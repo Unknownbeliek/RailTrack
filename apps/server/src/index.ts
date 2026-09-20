@@ -11,6 +11,7 @@ import { zonesRouter } from './routes/zones';
 import { tracksRouter } from './routes/tracks';
 import { healthRouter } from './routes/health';
 import { setupSocketIO } from './socket/handler';
+import { simulation } from './simulation/engine';
 
 export async function createApp() {
   const app = express();
@@ -70,6 +71,7 @@ async function startServer() {
       console.log(`  API Base: http://0.0.0.0:${port}/api`);
       console.log(`  WebSocket Base: ws://0.0.0.0:${port}`);
       console.log(`=================================================`);
+      simulation.start().catch((err) => console.error('[sim] failed to start', err));
     });
   } catch (err) {
     console.error('Fatal error during server startup:', err);

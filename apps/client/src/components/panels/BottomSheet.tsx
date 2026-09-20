@@ -5,7 +5,7 @@ import { useTrainStore } from '../../stores/trainStore';
 import { ContextCard } from './ContextCard';
 import { SpeedPanel } from './SpeedPanel';
 import { NearbyTrains } from './NearbyTrains';
-import { ChevronUp, ChevronDown, MapPin, Clock } from 'lucide-react';
+import { ChevronUp, ChevronDown, MapPin, Clock, X } from 'lucide-react';
 
 interface BottomSheetProps {
   train: TrainState;
@@ -13,7 +13,7 @@ interface BottomSheetProps {
 
 export const BottomSheet: React.FC<BottomSheetProps> = ({ train }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { theme } = useTrainStore();
+  const { theme, selectTrain } = useTrainStore();
 
   return (
     <motion.div
@@ -27,9 +27,18 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ train }) => {
           theme === 'light'
             ? 'bg-white/95 border-slate-300 text-slate-900 shadow-2xl'
             : 'bg-bgCardElevated/95 border-slate-700/80 text-textPrimary shadow-2xl'
-        } backdrop-blur-2xl border rounded-3xl overflow-hidden flex flex-col max-h-[82vh] transition-colors duration-300`}
+          } backdrop-blur-2xl border rounded-3xl overflow-hidden flex flex-col max-h-[82vh] transition-colors duration-300 relative`}
       >
         {/* Drag handle / collapse bar */}
+        <div className="absolute top-2 right-2 z-10">
+          <button
+            onClick={() => selectTrain(null)}
+            className={`p-1.5 rounded-full ${theme === 'light' ? 'hover:bg-slate-100' : 'hover:bg-slate-800'}`}
+            title="Close"
+          >
+            <X className="w-4 h-4 opacity-60" />
+          </button>
+        </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className={`w-full py-2.5 flex flex-col items-center justify-center cursor-pointer group ${

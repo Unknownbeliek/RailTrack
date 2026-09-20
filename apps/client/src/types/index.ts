@@ -1,3 +1,13 @@
+export type TrainType =
+  | 'RAJDHANI'
+  | 'SHATABDI'
+  | 'VANDE_BHARAT'
+  | 'DURONTO'
+  | 'SF'
+  | 'MAIL'
+  | 'PASSENGER'
+  | 'FREIGHT';
+
 export interface SpeedHistoryPoint {
   timestamp: number;
   speed: number;
@@ -5,7 +15,14 @@ export interface SpeedHistoryPoint {
 
 export interface DelayReason {
   priority: number;
-  type: 'LOOPED' | 'OVERTAKE_HOLD' | 'SPEED_RESTRICTION' | 'CONGESTION' | 'STATION_DWELL' | 'UNKNOWN';
+  type:
+    | 'LOOPED'
+    | 'OVERTAKE_HOLD'
+    | 'SPEED_RESTRICTION'
+    | 'CONGESTION'
+    | 'STATION_DWELL'
+    | 'SIGNAL_CHECK'
+    | 'UNKNOWN';
   icon: string;
   title: string;
   subtitle: string;
@@ -18,7 +35,7 @@ export interface DelayReason {
 export interface NearbyTrain {
   trainNo: string;
   trainName: string;
-  type: 'RAJDHANI' | 'SHATABDI' | 'SF' | 'MAIL' | 'PASSENGER' | 'FREIGHT';
+  type: TrainType | string;
   direction: 'SAME' | 'OPPOSITE';
   position: 'AHEAD' | 'BEHIND';
   distanceKm: number;
@@ -27,7 +44,7 @@ export interface NearbyTrain {
 }
 
 export interface OvertakePrediction {
-  type: 'INCOMING_OVERTAKE' | 'OVERTAKING_AHEAD' | 'CROSSING_AHEAD';
+  type: 'INCOMING_OVERTAKE' | 'OVERTAKING_AHEAD' | 'CROSSING_AHEAD' | 'WILL_OVERTAKE' | 'JUST_OVERTOOK';
   trainNo: string;
   trainName: string;
   distanceBehind: number;
@@ -56,7 +73,7 @@ export interface StationUpcoming {
 export interface TrainState {
   trainNo: string;
   trainName: string;
-  type: 'RAJDHANI' | 'SHATABDI' | 'SF' | 'MAIL' | 'PASSENGER' | 'FREIGHT';
+  type: TrainType;
   priority: number;
   lat: number;
   lng: number;
@@ -85,6 +102,7 @@ export interface TrainState {
   toStation: string;
   nextStation: StationUpcoming;
   lastStation: StationDeparture;
+  cars?: Array<{ lng: number; lat: number; heading: number; role: 'loco' | 'coach' | 'tail' }>;
 }
 
 export interface Station {
@@ -107,3 +125,6 @@ export interface User {
   role: 'user' | 'railfan' | 'admin';
   createdAt?: string;
 }
+
+export type MarkerMode = 'minimal' | 'typed';
+export type MapDensity = 'network' | 'railfan';

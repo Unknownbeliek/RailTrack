@@ -1,7 +1,7 @@
 export interface TrainState {
   trainNo: string;
   trainName: string;
-  type: 'RAJDHANI' | 'SHATABDI' | 'SF' | 'MAIL' | 'PASSENGER' | 'FREIGHT';
+  type: 'RAJDHANI' | 'SHATABDI' | 'VANDE_BHARAT' | 'DURONTO' | 'SF' | 'MAIL' | 'PASSENGER' | 'FREIGHT';
   priority: number;
   
   // Position & Map Snapping
@@ -42,6 +42,7 @@ export interface TrainState {
   toStation: string;
   nextStation: StationETA;
   lastStation: StationDeparture;
+  cars?: Array<{ lng: number; lat: number; heading: number; role: 'loco' | 'coach' | 'tail' }>;
 }
 
 export interface StationETA {
@@ -61,8 +62,8 @@ export interface StationDeparture {
 
 export interface DelayReason {
   priority: number;
-  type: 'LOOPED' | 'SIGNAL_CHECK' | 'CONGESTION' | 'SPEED_RESTRICTION' | 
-        'PRECEDING_TRAIN' | 'CAUTION_ORDER' | 'UNKNOWN';
+  type: 'LOOPED' | 'SIGNAL_CHECK' | 'CONGESTION' | 'SPEED_RESTRICTION' |
+        'PRECEDING_TRAIN' | 'CAUTION_ORDER' | 'STATION_DWELL' | 'OVERTAKE_HOLD' | 'UNKNOWN';
   title: string;
   subtitle: string;
   detail?: string;

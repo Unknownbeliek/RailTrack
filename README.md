@@ -104,46 +104,41 @@ Combines algorithm outputs into clear human-readable delay cards with confidence
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Unknownbeliek/RailTrack.git
-   cd RailTrack
-   ```
-
-2. Install dependencies for the web workspace:
-   ```bash
-   cd apps/web
-   npm install
-   ```
+```bash
+git clone https://github.com/Unknownbeliek/RailTrack.git
+cd RailTrack
+npm install
+```
 
 ---
 
 ## Running the Application
 
-### Launch Web Client
+Current stack is **Vite + Express** (`apps/client` + `apps/server`). The Next.js app in `apps/web` and Fastify gateway in `services/gateway` are leftover from the migration and are not used.
 
-To run the Next.js development server:
-
-```bash
-cd apps/web
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) (or `http://localhost:3001` if port 3000 is occupied) in your web browser.
-
-### Launch Backend Gateway (Optional)
-
-To start the Fastify Socket.io backend gateway server:
+### 1. Backend (required for the live demo fleet)
 
 ```bash
-cd services/gateway
-npx ts-node server.ts
+npm run dev:server
 ```
 
-The gateway server listens on port `4000` and provides WebSocket communication alongside REST endpoints:
-- `GET /health` : Health check status
-- `GET /trains` : Active train list
-- `GET /stations` : Station database
+Listens on `http://0.0.0.0:4000`. Seeds ~200 demo trains on Indian trunk corridors and moves them along polylines every second. No external train API.
+
+### 2. Client
+
+```bash
+npm run dev:client
+```
+
+Open [http://localhost:3000](http://localhost:3000). Vite proxies `/api` and `/socket.io` to the server.
+
+### Demo controls
+
+- Trains already move on load.
+- **Delay / Class** — two 2D marker modes (delay colour vs train class).
+- **Network / Railfan** — map density.
+- **More → Tundla overtake demo** — holds 12393 on the Tundla loop while 12301 closes on the mainline.
+- **More → Reset fleet** — reshuffle the demo.
 
 ---
 
