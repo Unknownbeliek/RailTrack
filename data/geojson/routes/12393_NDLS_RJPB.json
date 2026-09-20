@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "MAINLINE_NDLS_RJPB",
+        "name": "Delhi - Kanpur - Patna Mainline",
+        "railway": "rail",
+        "gauge": "broad"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [77.2197, 28.6431],
+          [77.4378, 28.6635],
+          [77.8000, 28.2500],
+          [78.0776, 27.8914],
+          [78.1800, 27.5000],
+          [78.2411, 27.2063],
+          [78.3965, 27.1511],
+          [79.0253, 26.7788],
+          [79.8000, 26.6000],
+          [80.3507, 26.4542],
+          [81.2000, 25.8000],
+          [81.8333, 25.4484],
+          [82.5000, 25.3000],
+          [83.1189, 25.2818],
+          [84.2000, 25.5000],
+          [85.1376, 25.6039],
+          [85.1611, 25.5997]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "TDL_LOOP_LINE_1",
+        "name": "Tundla Jn Loop Siding 1",
+        "railway": "siding",
+        "station": "TDL"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [78.2380, 27.2075],
+          [78.2413, 27.2065],
+          [78.2445, 27.2055]
+        ]
+      }
+    }
+  ]
+}
