@@ -1,7 +1,7 @@
 import { Server as SocketIOServer, Socket } from 'socket.io';
 import { getDatabase } from '../db';
 import { spatialPipeline } from '../spatial/pipeline';
-import { GPSReport } from '../../../../packages/core/types/train';
+import { GPSReport } from '../../../packages/core/types/train';
 import { simulation } from '../simulation/engine';
 
 export function setupSocketIO(io: SocketIOServer) {

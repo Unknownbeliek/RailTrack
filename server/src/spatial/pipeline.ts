@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { GPSReport, TrainState, Station } from '../../../../packages/core/types/train';
-import { snapToTrack } from '../../../../packages/core/algorithms/rail-snapper';
-import { TrainKalmanFilter } from '../../../../packages/core/algorithms/kalman-filter';
-import { detectLoopLine } from '../../../../packages/core/algorithms/loop-detector';
-import { predictOvertake, TrainForOvertake } from '../../../../packages/core/algorithms/overtake-predictor';
-import { generateDelayReason } from '../../../../packages/core/algorithms/context-engine';
+import { GPSReport, TrainState, Station } from '../../../packages/core/types/train';
+import { snapToTrack } from '../../../packages/core/algorithms/rail-snapper';
+import { TrainKalmanFilter } from '../../../packages/core/algorithms/kalman-filter';
+import { detectLoopLine } from '../../../packages/core/algorithms/loop-detector';
+import { predictOvertake, TrainForOvertake } from '../../../packages/core/algorithms/overtake-predictor';
+import { generateDelayReason } from '../../../packages/core/algorithms/context-engine';
 import { config } from '../config';
 
 export class SpatialPipeline {

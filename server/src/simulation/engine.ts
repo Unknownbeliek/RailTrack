@@ -1,5 +1,5 @@
 import { Server as SocketIOServer } from 'socket.io';
-import { TrainState } from '../../../../packages/core/types/train';
+import { TrainState } from '../../../packages/core/types/train';
 import { getDatabase } from '../db';
 import { buildNetwork, findLastStation, findStationAtKm } from '../seed/network';
 import { generateFleet, materializeTrain, SimMeta, TYPE_SPEED } from '../seed/fleet';

@@ -1,4 +1,4 @@
-import { TrainState } from '../../../../packages/core/types/train';
+import { TrainState } from '../../../packages/core/types/train';
 import { alongPolyline, offsetLngLat, sampleConsist } from '../simulation/geo';
 import { buildNetwork, BuiltRoute, findLastStation, findStationAtKm } from './network';
 import { STATION_CATALOG } from './stationsCatalog';

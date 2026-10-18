@@ -4,7 +4,8 @@ import { useTrainStore } from './stores/trainStore';
 import { useAuthStore } from './stores/authStore';
 
 import { BottomSheet } from './components/panels/BottomSheet';
-import { Shell } from "./components/layout/Shell";
+import { Header } from './components/header/Header';
+import { MapView } from './components/map/MapView';
 import { AuthModal } from './components/auth/AuthModal';
 import { initSocket } from './services/socket';
 import { apiGetTrains } from './services/api';
@@ -20,30 +21,46 @@ function DashboardView() {
   }, [trainNo, trains, selectTrain]);
 
   useEffect(() => {
+    document.body.classList.toggle('dark', theme === 'dark');
     document.body.classList.toggle('light', theme === 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.style.colorScheme = theme;
   }, [theme]);
 
   useEffect(() => {
     initializeAuth();
     initSocket();
-    apiGetTrains()
-      .then((data) => {
-        if (data?.length) {
-          setTrains(data);
-          setBackendOnline(true);
-        }
-      })
-      .catch(() => setBackendOnline(false));
+    let cancelled = false;
+
+    const syncTrains = async () => {
+      try {
+        const data = await apiGetTrains();
+        if (cancelled) return;
+        setTrains(data || []);
+        setBackendOnline(true);
+      } catch {
+        if (!cancelled) setBackendOnline(false);
+      }
+    };
+
+    void syncTrains();
+    const retryTimer = window.setInterval(syncTrains, 10000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(retryTimer);
+    };
   }, []);
 
   const selectedTrain = selectedTrainNo ? trains.get(selectedTrainNo) : null;
 
   return (
-    <>
-      <Shell />
+    <div className="relative h-screen w-screen overflow-hidden bg-[var(--bg-primary)]">
+      <MapView />
+      <Header onOpenAuth={() => setIsAuthOpen(true)} />
       {selectedTrain && <BottomSheet train={selectedTrain} />}
       <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-    </>
+    </div>
   );
 }
 

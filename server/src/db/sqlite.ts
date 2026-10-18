@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { IDatabase, User, TelemetryLog, StationFilter } from './types';
-import { TrainState, Station } from '../../../../packages/core/types/train';
+import { TrainState, Station } from '../../../packages/core/types/train';
 import { getInitialDemoTrains, loadStationsData } from '../seed/demoData';
 
 /**

@@ -5,26 +5,29 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0A0E17;
-  --bg-card: #141B2D;
-  --bg-card-elevated: #1C2540;
-  --accent-blue: #4DA8FF;
-  --accent-green: #4ADE80;
-  --accent-orange: #FB923C;
-  --accent-red: #F87171;
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --track-line: #334155;
+  --bg-primary: #f7fafc;
+  --bg-card: #ffffff;
+  --bg-card-elevated: #f8fafc;
+  --accent-blue: #2563eb;
+  --accent-green: #16a34a;
+  --accent-orange: #ea580c;
+  --accent-red: #dc2626;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --track-line: #cbd5e1;
 }
 
-body.light {
-  --bg-primary: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --bg-card-elevated: #F1F5F9;
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+body.dark {
+  --bg-primary: #0a0e17;
+  --bg-card: #141b2d;
+  --bg-card-elevated: #1c2540;
+  --accent-blue: #4da8ff;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
+  --accent-red: #f87171;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --track-line: #334155;
 }
 
 body {
@@ -34,6 +37,36 @@ body {
   overflow: hidden;
   user-select: none;
   transition: background-color 0.3s ease, color 0.3s ease;
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.08), transparent 28%),
+    radial-gradient(circle at 100% 0%, rgba(14, 165, 233, 0.08), transparent 24%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+
+body.dark {
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08), transparent 28%),
+    radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.08), transparent 24%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.24), rgba(15, 23, 42, 0));
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 80%);
+}
+
+body.dark::before {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
 }
 
 /* Custom scrollbars */
@@ -49,20 +82,20 @@ body {
   border-radius: 4px;
 }
 
-/* Maplibre Dark Overlay Overrides */
+/* Maplibre Overlay Overrides */
 .maplibregl-popup-content {
-  background: #141B2D !important;
-  color: #F1F5F9 !important;
-  border: 1px solid #334155 !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #dbe4f0 !important;
   border-radius: 12px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 16px 30px -12px rgba(15, 23, 42, 0.28) !important;
   padding: 12px 16px !important;
 }
 
-body.light .maplibregl-popup-content {
-  background: #FFFFFF !important;
-  color: #0F172A !important;
-  border: 1px solid #CBD5E1 !important;
+body.dark .maplibregl-popup-content {
+  background: #141b2d !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #334155 !important;
 }
 
 /* Train Dot Pulse Effect */
@@ -121,15 +154,15 @@ body.light .maplibregl-popup-content {
 }
 
 .tp-popup .maplibregl-popup-content {
-  background: rgba(8, 12, 20, 0.92) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
   border-radius: 12px !important;
   padding: 8px 10px !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.16) !important;
 }
 .tp-popup .maplibregl-popup-tip {
-  border-top-color: rgba(8, 12, 20, 0.92) !important;
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
 }
-.tp-pop-name { font-weight: 700; font-size: 12px; color: #F8FAFC; }
-.tp-pop-meta { font-size: 10px; color: #94A3B8; font-family: ui-monospace, monospace; margin-top: 2px; }
-.tp-pop-delay { font-size: 10px; color: #7DD3FC; margin-top: 2px; font-weight: 600; }
+.tp-pop-name { font-weight: 700; font-size: 12px; color: #0f172a; }
+.tp-pop-meta { font-size: 10px; color: #64748b; font-family: ui-monospace, monospace; margin-top: 2px; }
+.tp-pop-delay { font-size: 10px; color: #0369a1; margin-top: 2px; font-weight: 600; }

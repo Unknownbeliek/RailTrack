@@ -1,4 +1,4 @@
-import { TrainState, Station } from '../../../../packages/core/types/train';
+import { TrainState, Station } from '../../../packages/core/types/train';
 
 export interface User {
   id: string;

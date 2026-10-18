@@ -8,17 +8,17 @@ export const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className={`p-2 rounded-xl border transition-all duration-200 flex items-center justify-center shadow-lg ${
+      className={`h-11 w-11 rounded-full border transition-all duration-200 flex items-center justify-center shadow-sm ${
         theme === 'dark'
-          ? 'bg-slate-800/90 text-amber-400 border-slate-700 hover:bg-slate-700'
-          : 'bg-white text-slate-800 border-slate-300 hover:bg-slate-100'
+          ? 'bg-slate-900 text-amber-300 border-white/10 hover:bg-slate-800'
+          : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
       }`}
       title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4 text-amber-400 fill-amber-400/20" />
+        <Sun className="w-4 h-4 text-amber-300 fill-amber-300/20" />
       ) : (
-        <Moon className="w-4 h-4 text-indigo-600 fill-indigo-600/20" />
+        <Moon className="w-4 h-4 text-sky-600 fill-sky-600/20" />
       )}
     </button>
   );

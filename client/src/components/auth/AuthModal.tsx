@@ -71,7 +71,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <Lock className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-extrabold">{isRegister ? 'Join TrackPulse' : 'Sign In to TrackPulse'}</h2>
+            <h2 className="text-lg font-extrabold">{isRegister ? 'Join RailTrack' : 'Sign In to RailTrack'}</h2>
             <p className="text-xs text-slate-400">Indian Railway Spatial Intelligence Platform</p>
           </div>
         </div>

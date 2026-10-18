@@ -3,15 +3,22 @@ import { useTrainStore } from '../../stores/trainStore';
 import { Eye, Compass } from 'lucide-react';
 
 export const ModeToggle: React.FC = () => {
-  const { mode, setMode } = useTrainStore();
+  const { mode, setMode, theme } = useTrainStore();
+
+  const shell =
+    theme === 'light'
+      ? 'bg-white border-slate-200 shadow-[0_14px_36px_rgba(15,23,42,0.08)]'
+      : 'bg-bgCardElevated/90 border-slate-700/60 shadow-xl';
 
   return (
-    <div className="flex items-center bg-bgCardElevated/90 backdrop-blur-md p-1 rounded-xl border border-slate-700/60 shadow-xl">
+    <div className={`flex items-center backdrop-blur-md p-1 rounded-full border ${shell}`}>
       <button
         onClick={() => setMode('PASSENGER')}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
           mode === 'PASSENGER'
-            ? 'bg-accentBlue text-slate-950 shadow-md shadow-accentBlue/20 font-bold'
+            ? 'bg-sky-500 text-white shadow-md shadow-sky-500/20 font-bold'
+            : theme === 'light'
+            ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
             : 'text-textSecondary hover:text-textPrimary hover:bg-slate-800/50'
         }`}
       >
@@ -23,7 +30,9 @@ export const ModeToggle: React.FC = () => {
         onClick={() => setMode('RAILFAN')}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
           mode === 'RAILFAN'
-            ? 'bg-accentOrange text-slate-950 shadow-md shadow-accentOrange/20 font-bold'
+            ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
+            : theme === 'light'
+            ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
             : 'text-textSecondary hover:text-textPrimary hover:bg-slate-800/50'
         }`}
       >

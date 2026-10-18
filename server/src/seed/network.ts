@@ -1,4 +1,4 @@
-import { Station } from '../../../../packages/core/types/train';
+import { Station } from '../../../packages/core/types/train';
 import { STATION_CATALOG, stationList } from './stationsCatalog';
 import { EXTRA_WAYPOINTS, ROUTE_CATALOG, RouteDef } from './routeCatalog';
 import { indexPolyline, LngLat, PolylineIndex } from '../simulation/geo';
