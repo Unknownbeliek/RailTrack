@@ -3,28 +3,27 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*",
-    "services/*"
+    "client/*",
+    "server/*"
   ],
   "scripts": {
     "dev": "echo 'Start both: npm run dev:server  and  npm run dev:client'",
-    "dev:client": "npm --prefix apps/client run dev",
-    "build:client": "npm --prefix apps/client run build",
-    "dev:server": "npm --prefix apps/server run dev",
-    "build:server": "npm --prefix apps/server run build",
-    "start:server": "npm --prefix apps/server run start",
+    "dev:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "dev:server": "npm --prefix server run dev",
+    "build:server": "npm --prefix server run build",
+    "start:server": "npm --prefix server run start",
     "build": "npm run build:server && npm run build:client",
-    "dev:web": "npm --prefix apps/web run dev",
-    "build:web": "npm --prefix apps/web run build",
-    "start:gateway": "ts-node services/gateway/server.ts",
+
+
+
     "patch:speeds": "node scripts/patch-speeds.js",
     "build:tiles": "tippecanoe -o data/tiles/india-rail.pmtiles -Z4 -z14 --drop-densest-as-needed data/geojson/tracks-with-speed.geojson data/geojson/stations.geojson",
     "download:osm": "bash scripts/download-osm.sh"
   },
   "dependencies": {
     "@turf/turf": "^7.1.0",
-    "fastify": "^4.28.1",
+
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
